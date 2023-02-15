@@ -1,9 +1,11 @@
 ﻿using DI.Example;
 
+var cont = new NewContainer();
 var number1 = GetNumber("Enter the first number: > ");
 var number2 = GetNumber("Enter the second number: > ");
 var operation = GetOperator();
-var calc = new Calculator();
+cont.Register<ILogger, FileLogger>();
+var calc = new Calculator(cont.Resolve<ILogger>());
 var result = GetResult(calc, number1, number2, operation);
 Console.WriteLine($"{number1} {operation} {number2} = {result}");
 Console.Write("Press any key to continue...");
